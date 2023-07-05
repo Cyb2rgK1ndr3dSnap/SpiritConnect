@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://ciqoh4h75cnuh"]
+
+[ext_resource type="Texture2D" uid="uid://bxe102u8yfbnk" path="res://Resources/world/BunchOfRocks_Pack/RockPack128x128.png" id="1_ve1ma"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b716u"]
+size = Vector2(124, 122)
+
+[node name="rocks" type="StaticBody2D"]
+position = Vector2(546, 262)
+
+[node name="RockPack128x128" type="Sprite2D" parent="."]
+texture = ExtResource("1_ve1ma")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 2)
+shape = SubResource("RectangleShape2D_b716u")

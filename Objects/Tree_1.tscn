@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://ddvdb7n4nd0xu"]
+
+[ext_resource type="Texture2D" uid="uid://dk23rq4rx45a8" path="res://Resources/world/Pixel Art Top Down - Basic/Resources_individuals/plants/Tree_1.png" id="1_l5qwb"]
+[ext_resource type="Texture2D" uid="uid://bsn4bihwbhmpu" path="res://Resources/world/Pixel Art Top Down - Basic/Resources_individuals/plants/Tree_1_shadow.png" id="2_d20s2"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bilf6"]
+radius = 6.0
+height = 38.0
+
+[node name="Tree_1" type="StaticBody2D"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
+texture = ExtResource("1_l5qwb")
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprite2D"]
+z_index = -1
+position = Vector2(3, 34)
+texture = ExtResource("2_d20s2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = 1
+position = Vector2(0, 53)
+shape = SubResource("CapsuleShape2D_bilf6")

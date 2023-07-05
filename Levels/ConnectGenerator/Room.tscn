@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://8db76wet3oyo"]
+
+[ext_resource type="Script" path="res://Levels/ConnectGenerator/Room.gd" id="1_3g0v0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h0rt2"]
+
+[node name="Room" type="RigidBody2D"]
+gravity_scale = 0.0
+script = ExtResource("1_3g0v0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_h0rt2")

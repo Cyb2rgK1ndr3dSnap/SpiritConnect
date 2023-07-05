@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://d0q7ohgfkvltn"]
+
+[ext_resource type="Texture2D" uid="uid://dwic76x86316j" path="res://Resources/world/Pixel Art Top Down - Basic/Resources_individuals/objects/Magic_circle_1.png" id="1_hfniu"]
+
+[node name="magic_circle" type="StaticBody2D"]
+z_index = -1
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_hfniu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]

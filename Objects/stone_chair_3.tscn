@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://22q73nq18fow"]
+
+[ext_resource type="Texture2D" uid="uid://dqq68uteaadfl" path="res://Resources/world/Pixel Art Top Down - Basic/Resources_individuals/objects/Stone_chair_3.png" id="1_lktgm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_emxjf"]
+size = Vector2(23, 50)
+
+[node name="StaticBody2D" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_lktgm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-5.5, 6)
+shape = SubResource("RectangleShape2D_emxjf")

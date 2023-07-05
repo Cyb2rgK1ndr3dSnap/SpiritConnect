@@ -1,0 +1,132 @@
+[gd_resource type="TileSet" load_steps=13 format=3 uid="uid://dsmki1yshokdf"]
+
+[ext_resource type="Texture2D" uid="uid://dt0cqfdspvphx" path="res://Resources/ConnectGenerator/assets-prototype.svg" id="1"]
+[ext_resource type="Texture2D" uid="uid://cm2qamuvufo30" path="res://Resources/ConnectGenerator/field.png" id="1_8y4jj"]
+[ext_resource type="Texture2D" uid="uid://ci8iwaeaceoow" path="res://Resources/ConnectGenerator/field_pillar_1.png" id="3_1kis0"]
+[ext_resource type="Texture2D" uid="uid://bsm0wct5pvqvx" path="res://Resources/ConnectGenerator/field_stone_tiles_1.png" id="4_7lpt3"]
+[ext_resource type="Texture2D" uid="uid://kxhgdkrcg33h" path="res://Resources/world/Pixel Art Top Down - Basic/Resources_individuals/objects/Magic_stone_1.png" id="5_rs1n4"]
+[ext_resource type="PackedScene" uid="uid://ccj0p3vvcbh1c" path="res://Objects/Magic_stone_1.tscn" id="6_seoyt"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_t41xs"]
+texture = ExtResource("1_8y4jj")
+texture_region_size = Vector2i(60, 60)
+0:0/next_alternative_id = 5
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/1 = 1
+0:0/1/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/1/physics_layer_0/angular_velocity = 0.0
+0:0/2 = 2
+0:0/2/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/2/physics_layer_0/angular_velocity = 0.0
+0:0/3 = 3
+0:0/3/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/3/physics_layer_0/angular_velocity = 0.0
+0:0/4 = 4
+0:0/4/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/4/physics_layer_0/angular_velocity = 0.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_g4abs"]
+texture = ExtResource("1")
+texture_region_size = Vector2i(60, 60)
+0:0/next_alternative_id = 5
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/1 = 1
+0:0/1/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/1/physics_layer_0/angular_velocity = 0.0
+0:0/2 = 2
+0:0/2/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/2/physics_layer_0/angular_velocity = 0.0
+0:0/3 = 3
+0:0/3/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/3/physics_layer_0/angular_velocity = 0.0
+0:0/4 = 4
+0:0/4/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/4/physics_layer_0/angular_velocity = 0.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_a8t6e"]
+texture = ExtResource("3_1kis0")
+texture_region_size = Vector2i(60, 60)
+0:0/next_alternative_id = 5
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-11, -30, 10, -30, 11, 30, -9.5, 30)
+0:0/2 = 2
+0:0/2/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/2/physics_layer_0/angular_velocity = 0.0
+0:0/2/physics_layer_0/polygon_0/points = PackedVector2Array(-11, -30, 10, -30, 11, 30, -9.5, 30)
+0:0/3 = 3
+0:0/3/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/3/physics_layer_0/angular_velocity = 0.0
+0:0/3/physics_layer_0/polygon_0/points = PackedVector2Array(-11, -30, 10, -30, 11, 30, -9.5, 30)
+0:0/1 = 1
+0:0/1/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/1/physics_layer_0/angular_velocity = 0.0
+0:0/1/physics_layer_0/polygon_0/points = PackedVector2Array(-11, -30, 10, -30, 11, 30, -9.5, 30)
+0:0/4 = 4
+0:0/4/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/4/physics_layer_0/angular_velocity = 0.0
+0:0/4/physics_layer_0/polygon_0/points = PackedVector2Array(-11, -30, 10, -30, 11, 30, -9.5, 30)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ncjas"]
+texture = ExtResource("4_7lpt3")
+texture_region_size = Vector2i(60, 60)
+0:0/next_alternative_id = 5
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/1 = 1
+0:0/1/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/1/physics_layer_0/angular_velocity = 0.0
+0:0/2 = 2
+0:0/2/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/2/physics_layer_0/angular_velocity = 0.0
+0:0/3 = 3
+0:0/3/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/3/physics_layer_0/angular_velocity = 0.0
+0:0/4 = 4
+0:0/4/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/4/physics_layer_0/angular_velocity = 0.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kvstb"]
+texture = ExtResource("5_rs1n4")
+texture_region_size = Vector2i(34, 58)
+0:0/next_alternative_id = 5
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-13, -25.5, 13, -26, 13, 25.5, -13, 26)
+0:0/1 = 1
+0:0/1/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/1/physics_layer_0/angular_velocity = 0.0
+0:0/1/physics_layer_0/polygon_0/points = PackedVector2Array(-13, -25.5, 13, -26, 13, 25.5, -13, 26)
+0:0/2 = 2
+0:0/2/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/2/physics_layer_0/angular_velocity = 0.0
+0:0/2/physics_layer_0/polygon_0/points = PackedVector2Array(-13, -25.5, 13, -26, 13, 25.5, -13, 26)
+0:0/3 = 3
+0:0/3/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/3/physics_layer_0/angular_velocity = 0.0
+0:0/3/physics_layer_0/polygon_0/points = PackedVector2Array(-13, -25.5, 13, -26, 13, 25.5, -13, 26)
+0:0/4 = 4
+0:0/4/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/4/physics_layer_0/angular_velocity = 0.0
+0:0/4/physics_layer_0/polygon_0/points = PackedVector2Array(-13, -25.5, 13, -26, 13, 25.5, -13, 26)
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_xooke"]
+scenes/5/scene = ExtResource("6_seoyt")
+
+[resource]
+tile_size = Vector2i(60, 60)
+physics_layer_0/collision_layer = 2
+physics_layer_0/collision_mask = 2
+sources/0 = SubResource("TileSetAtlasSource_t41xs")
+sources/1 = SubResource("TileSetAtlasSource_g4abs")
+sources/2 = SubResource("TileSetAtlasSource_a8t6e")
+sources/3 = SubResource("TileSetAtlasSource_ncjas")
+sources/4 = SubResource("TileSetAtlasSource_kvstb")
+sources/5 = SubResource("TileSetScenesCollectionSource_xooke")

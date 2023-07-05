@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://b6185kk2v4mx5"]
+
+[ext_resource type="Texture2D" uid="uid://duuo6rf4b4ca1" path="res://Resources/world/Pixel Art Top Down - Basic/Resources_individuals/objects/Stone_3.png" id="1_fub2k"]
+
+[node name="Stone_3" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_fub2k")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-12, 1, -1, -10, 11, 0, 1, 10)

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://b823lkaycnn8x"]
+
+[ext_resource type="Texture2D" uid="uid://dgcon1a1g0ogb" path="res://Resources/world/Pixel Art Top Down - Basic/Resources_individuals/objects/Stone_1.png" id="1_vvx3e"]
+
+[node name="Stone_1" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_vvx3e")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]

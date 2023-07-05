@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://rx8tiqq4bfua"]
+
+[ext_resource type="PackedScene" uid="uid://coinljyaqicrn" path="res://Characters/player.tscn" id="1_eqf2c"]
+[ext_resource type="Script" path="res://Levels/ConnectGenerator/SpiritConnectGenerator.gd" id="1_xkggy"]
+[ext_resource type="TileSet" uid="uid://dsmki1yshokdf" path="res://Resources/ConnectGenerator/tileset-prototype.tres" id="2_wd5g6"]
+[ext_resource type="Script" path="res://Levels/ConnectGenerator/Level.gd" id="3_p533e"]
+
+[node name="SpiritConnectGenerator" type="Node2D"]
+position = Vector2(1, 0)
+script = ExtResource("1_xkggy")
+max_rooms = 50
+reconnection_factor = 0.02
+
+[node name="Level" type="TileMap" parent="."]
+show_behind_parent = true
+tile_set = ExtResource("2_wd5g6")
+format = 2
+layer_1/name = ""
+layer_1/enabled = true
+layer_1/modulate = Color(1, 1, 1, 1)
+layer_1/y_sort_enabled = false
+layer_1/y_sort_origin = 0
+layer_1/z_index = 0
+layer_1/tile_data = PackedInt32Array()
+script = ExtResource("3_p533e")
+
+[node name="Rooms" type="Node2D" parent="."]
+
+[node name="Player" parent="." instance=ExtResource("1_eqf2c")]
+position = Vector2(0, 38)
+speed = 500.0
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(0.4, 0.4)
