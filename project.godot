@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="SpiritConnect"
-run/main_scene="res://Levels/ConnectGenerator/SpiritConnectGenerator.tscn"
+run/main_scene="res://Levels/Lobby.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
 config/icon="res://icon.svg"
 boot_splash/layer_2="world"
@@ -19,7 +19,8 @@ boot_splash/layer_1="Player"
 
 [autoload]
 
-MOVEMENT="*res://Resources/scripts/movementGLOBAL.gd"
+MOVEMENT="*res://scripts/movementGLOBAL.gd"
+SceneTransition="*res://Levels/Transition/Scene_Transition.tscn"
 
 [input]
 

@@ -10,6 +10,8 @@ size = Vector2(20, 33)
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_jv3dj")
 
+[node name="Magic_mark" type="Sprite2D" parent="."]
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 5.5)
 shape = SubResource("RectangleShape2D_7tkf2")

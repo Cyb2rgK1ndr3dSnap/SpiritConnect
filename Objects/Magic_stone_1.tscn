@@ -1,14 +1,144 @@
-[gd_scene load_steps=3 format=3 uid="uid://ccj0p3vvcbh1c"]
+[gd_scene load_steps=14 format=3 uid="uid://ccj0p3vvcbh1c"]
 
+[ext_resource type="Script" path="res://Objects/Magic_stone_1.gd" id="1_3clpf"]
 [ext_resource type="Texture2D" uid="uid://kxhgdkrcg33h" path="res://Resources/world/Pixel Art Top Down - Basic/Resources_individuals/objects/Magic_stone_1.png" id="1_pbec6"]
+[ext_resource type="Texture2D" uid="uid://b7mljlm2p6rkx" path="res://Resources/world/Pixel Art Top Down - Basic/Resources_individuals/objects/Magic_stone_words_1.png" id="3_m7ded"]
+[ext_resource type="PackedScene" uid="uid://bmxxt0wb01s5u" path="res://Objects/animations/RotationBehavior.tscn" id="4_pxojl"]
+
+[sub_resource type="Animation" id="Animation_e6tb3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("magic_mark:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("magic_mark:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("magic_mark:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_m7ded")]
+}
+
+[sub_resource type="Animation" id="Animation_jeja4"]
+resource_name = "touch_me"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("magic_mark:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("magic_mark:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.862745), Color(1, 1, 1, 0.784314), Color(1, 1, 1, 0.705882), Color(1, 1, 1, 0.470588), Color(1, 1, 1, 0.392157), Color(1, 1, 1, 0.313726), Color(1, 1, 1, 0.235294), Color(1, 1, 1, 0.156863), Color(1, 1, 1, 0.0784314)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("magic_mark:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_m7ded")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kw8pm"]
+_data = {
+"RESET": SubResource("Animation_e6tb3"),
+"touch_me": SubResource("Animation_jeja4")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_aetrx"]
+animation = &"touch_me"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nkl3c"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_aggof"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_48p44"]
+states/End/position = Vector2(558, 100)
+states/touch_me/node = SubResource("AnimationNodeAnimation_aetrx")
+states/touch_me/position = Vector2(393, 100)
+transitions = ["Start", "touch_me", SubResource("AnimationNodeStateMachineTransition_nkl3c"), "touch_me", "End", SubResource("AnimationNodeStateMachineTransition_aggof")]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_vfm5p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7vyq8"]
 size = Vector2(26, 37)
 
 [node name="Magic_stone_1" type="StaticBody2D"]
+y_sort_enabled = true
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_3clpf")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+y_sort_enabled = true
 texture = ExtResource("1_pbec6")
+
+[node name="magic_mark" type="Sprite2D" parent="."]
+position = Vector2(0, 5)
+texture = ExtResource("3_m7ded")
+
+[node name="RotationBehavior" parent="magic_mark" instance=ExtResource("4_pxojl")]
+radius = 25.0
+speed = 3.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_kw8pm")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_48p44")
+anim_player = NodePath("../AnimationPlayer")
+active = true
+process_callback = 0
+parameters/playback = SubResource("AnimationNodeStateMachinePlayback_vfm5p")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 7.5)

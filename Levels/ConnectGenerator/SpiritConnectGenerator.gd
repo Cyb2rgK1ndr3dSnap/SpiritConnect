@@ -13,9 +13,9 @@ extends Node2D
 signal rooms_placed
 
 const Room := preload("Room.tscn")
-const magic_circle := preload("res://Objects/magic_circle.tscn")
-# LOAD SCENE OF MAGIC CIRCLE
 
+var nodes: Array = []
+var node
 # Maximum number of generated rooms.
 @export var max_rooms := 60
 # Controls the number of paths we add to the dungeon after generating it,
@@ -33,6 +33,8 @@ var _draw_extra := []
 
 @onready var rooms: Node2D = $Rooms
 @onready var level: TileMap = $Level
+@onready var player: CharacterBody2D = $Player
+@onready var rayCast: RayCast2D = $Player/RayCast2D
 
 
 func _ready() -> void:
@@ -102,22 +104,25 @@ func _draw() -> void:
 		return
 	##!!PARTE PARA GENERAR NODO EN EL ROOM
 	var tilemap_transform := level.get_global_transform().affine_inverse()
-	##!!
 	for point1_id in _path.get_point_ids():
 		var point1_position := _path.get_point_position(point1_id)
 		for point2_id in _path.get_point_connections(point1_id):
 			var point2_position := _path.get_point_position(point2_id)
 			draw_line(point1_position, point2_position, Color.RED, 20)
-			
-			###!!GENERA LA IMAGEN DEL NODO EN EL ROOM
+			#print("DISTANCE",point1_position.distance_to(point2_position))
+			###!!SET THE NODES IN THE MAP
 			var tilemap_point1 := level.local_to_map(tilemap_transform.basis_xform(point1_position))
 			var tilemap_point2 := level.local_to_map(tilemap_transform.basis_xform(point2_position))
+			#print(level.local_to_map(level.get_global_transform().affine_inverse().basis_xform(point1_position)))
 			level.set_cell(1, tilemap_point1, 5, Vector2i.ZERO, 5)
 			level.set_cell(1, tilemap_point2, 5, Vector2i.ZERO, 5)
-
+			SpiritConnectUtils.add_variable_to_dict(tilemap_point1,nodes)
+			SpiritConnectUtils.add_variable_to_dict(tilemap_point2,nodes)
+	
 	if not _draw_extra.is_empty():
 		for pair in _draw_extra:
 			draw_line(pair[0], pair[1], Color.GREEN, 20)
+	
 
 
 # Places the rooms and starts the physics simulation. Once the simulation is done
@@ -139,10 +144,13 @@ func _generate() -> void:
 	# Draws the tiles on the `level` tilemap.
 	level.clear()
 	###!!!!!!
+	
+	"""
 	for x in range(-100, map_w):
 		for y in range(-100, map_h):
 			#level.set_cell(0, Vector2i(x,y), 1, Vector2i.ZERO, 1)
 			level.set_cell(0, Vector2i(x,y), 0, Vector2i.ZERO, 0)
+	"""
 	
 	for point in _data:
 		level.set_cell(0, point, 3, Vector2i.ZERO, 3)
@@ -243,12 +251,21 @@ func _add_corridor(start: int, end: int, constant: int, axis: int) -> void:
 
 func _is_main_room(room: SpiritConnectRoom) -> bool:
 	return room.size.x > _mean_room_size.x and room.size.y > _mean_room_size.y
-	
+
+###!!!!!CAMBIAR POSICIÓN DE PLAYER	
 func place_player():
-	#print(_draw_extra)
-	var Player := $Player
 	var roomsPos =  SpiritConnectUtils.choose(_draw_extra)
 	var startPos =  SpiritConnectUtils.choose(roomsPos)
 	#print("Posición de spawn",startPos)
-	Player.position = startPos
-	###!!!!!CAMBIAR POSICIÓN DE PLAYER
+	print(level.local_to_map(level.get_global_transform().affine_inverse().basis_xform(startPos)))
+	player.position = startPos
+	print(nodes,len(nodes))
+	#print(level.local_to_map(player.global_position))
+	
+func _physics_process(delta):
+	#print(level.local_to_map(player.global_position))
+	node = Character_Player_RayCast.rotate_pointer(level,rayCast)
+	if node in nodes:
+		print("Existe node")
+	
+	

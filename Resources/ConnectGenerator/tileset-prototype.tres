@@ -123,7 +123,7 @@ scenes/5/scene = ExtResource("6_seoyt")
 [resource]
 tile_size = Vector2i(60, 60)
 physics_layer_0/collision_layer = 2
-physics_layer_0/collision_mask = 2
+physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_t41xs")
 sources/1 = SubResource("TileSetAtlasSource_g4abs")
 sources/2 = SubResource("TileSetAtlasSource_a8t6e")

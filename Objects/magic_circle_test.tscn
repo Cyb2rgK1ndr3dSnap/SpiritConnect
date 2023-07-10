@@ -1,8 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://clao5x6eudepj"]
 
-[ext_resource type="Texture2D" uid="uid://dwic76x86316j" path="res://resources/world/Pixel Art Top Down - Basic/Resources_individuals/objects/Magic_circle_1.png" id="1_8kdbs"]
+[ext_resource type="Texture2D" uid="uid://dwic76x86316j" path="res://Resources/world/Pixel Art Top Down - Basic/Resources_individuals/objects/Magic_circle_1.png" id="1_8kdbs"]
 
 [node name="Node2D" type="Node2D"]
+z_index = -1
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_8kdbs")

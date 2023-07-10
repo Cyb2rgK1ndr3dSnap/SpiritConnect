@@ -69,3 +69,11 @@ static func choose(choices):
 
 	var rand_index = randi() % choices.size()
 	return choices[rand_index]
+	
+
+static func add_variable_to_dict(value, my_dict):
+	if value not in my_dict:
+		my_dict.append(value)
+		print("Variable added successfully.")
+	else:
+		print("Value already exists. Not adding.")

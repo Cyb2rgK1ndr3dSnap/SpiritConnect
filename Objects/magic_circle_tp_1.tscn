@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://g1fldmkh830k"]
+
+[ext_resource type="Texture2D" uid="uid://dwic76x86316j" path="res://Resources/world/Pixel Art Top Down - Basic/Resources_individuals/objects/Magic_circle_1.png" id="1_rbwnf"]
+[ext_resource type="Texture2D" uid="uid://b7mljlm2p6rkx" path="res://Resources/world/Pixel Art Top Down - Basic/Resources_individuals/objects/Magic_stone_words_1.png" id="2_yohrk"]
+[ext_resource type="PackedScene" uid="uid://bmxxt0wb01s5u" path="res://Objects/animations/RotationBehavior.tscn" id="3_136tc"]
+[ext_resource type="Texture2D" uid="uid://qfhm56y08crv" path="res://Resources/world/Pixel Art Top Down - Basic/Resources_individuals/objects/Magic_stone_words_2.png" id="4_fwniv"]
+[ext_resource type="Texture2D" uid="uid://rtgwv0a0podm" path="res://Resources/world/Pixel Art Top Down - Basic/Resources_individuals/objects/Magic_stone_words_3.png" id="5_lhk4s"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_go7jg"]
+radius = 34.4819
+
+[node name="magic_circle_tp_1" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -1
+texture = ExtResource("1_rbwnf")
+
+[node name="Magic_mark_1" type="Sprite2D" parent="."]
+texture = ExtResource("2_yohrk")
+
+[node name="RotationBehavior" parent="Magic_mark_1" instance=ExtResource("3_136tc")]
+radius = 30.0
+speed = 1.0
+
+[node name="Magic_mark_2" type="Sprite2D" parent="."]
+modulate = Color(0.933333, 0, 0.937255, 1)
+texture = ExtResource("4_fwniv")
+
+[node name="RotationBehavior" parent="Magic_mark_2" instance=ExtResource("3_136tc")]
+radius = 40.0
+speed = 2.0
+
+[node name="Magic_mark_3" type="Sprite2D" parent="."]
+modulate = Color(0.556863, 1, 0, 1)
+texture = ExtResource("5_lhk4s")
+
+[node name="RotationBehavior" parent="Magic_mark_3" instance=ExtResource("3_136tc")]
+radius = 50.0
+speed = 3.0
+
+[node name="Area2D" type="Area2D" parent="."]
+y_sort_enabled = true
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_go7jg")

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bmxxt0wb01s5u"]
+
+[ext_resource type="Script" path="res://Objects/animations/RotationBehavior.gd" id="1_moter"]
+
+[node name="RotationBehavior" type="Node"]
+script = ExtResource("1_moter")

@@ -1,53 +1,40 @@
-[gd_scene load_steps=28 format=3 uid="uid://coinljyaqicrn"]
+[gd_scene load_steps=29 format=3 uid="uid://coinljyaqicrn"]
 
-[ext_resource type="Script" path="res://Characters/player.gd" id="1_46f4d"]
-[ext_resource type="Texture2D" uid="uid://bh00psqm4umdb" path="res://Resources/B_witch_run - right.png" id="2_a7xgm"]
-[ext_resource type="Texture2D" uid="uid://b7v8upxj4ymjv" path="res://Resources/B_witch_run - left.png" id="3_xjdrf"]
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_n7txr"]
-load_path = "res://.godot/imported/B_witch_idle.png-8fbe458fb64b823233803307f904b281.ctex"
+[ext_resource type="Script" path="res://Characters/player.gd" id="1_j6b0o"]
+[ext_resource type="Texture2D" uid="uid://c8lj8bpqwmmmc" path="res://Resources/Blue_witch/B_witch_idle.png" id="1_lk362"]
+[ext_resource type="Texture2D" uid="uid://cgh4rl3cxiutr" path="res://Resources/Blue_witch/B_witch_run - left.png" id="2_n5fro"]
+[ext_resource type="Texture2D" uid="uid://cm3lwi87ls8pf" path="res://Resources/Blue_witch/B_witch_run - right.png" id="3_0mjca"]
+[ext_resource type="Script" path="res://Characters/InteracRay.gd" id="4_v5cea"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fvaky"]
 radius = 6.0
 height = 14.0
 
-[sub_resource type="Animation" id="Animation_iofac"]
+[sub_resource type="Animation" id="Animation_7mo67"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:vframes")
+tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [6]
+"values": [0]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/path = NodePath("Sprite2D:texture")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:texture")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [SubResource("CompressedTexture2D_n7txr")]
+"values": [ExtResource("1_lk362")]
 }
 
 [sub_resource type="Animation" id="Animation_we8jw"]
@@ -88,7 +75,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [SubResource("CompressedTexture2D_n7txr")]
+"values": [ExtResource("1_lk362")]
 }
 
 [sub_resource type="Animation" id="Animation_xpcq2"]
@@ -129,7 +116,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("3_xjdrf")]
+"values": [ExtResource("2_n5fro")]
 }
 
 [sub_resource type="Animation" id="Animation_374qv"]
@@ -170,7 +157,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("2_a7xgm")]
+"values": [ExtResource("3_0mjca")]
 }
 
 [sub_resource type="Animation" id="Animation_0jp37"]
@@ -181,7 +168,7 @@ resource_name = "run_up"
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1wnru"]
 _data = {
-"RESET": SubResource("Animation_iofac"),
+"RESET": SubResource("Animation_7mo67"),
 "idle": SubResource("Animation_we8jw"),
 "run-left": SubResource("Animation_xpcq2"),
 "run-right": SubResource("Animation_374qv"),
@@ -265,16 +252,16 @@ graph_offset = Vector2(-216.252, 14.8309)
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(41, 40)
 collision_mask = 2
-script = ExtResource("1_46f4d")
-speed = 300.0
+script = ExtResource("1_j6b0o")
+speed = 500.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -1)
-texture = SubResource("CompressedTexture2D_n7txr")
+texture = ExtResource("1_lk362")
 vframes = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1, 7)
+position = Vector2(-1, 5)
 shape = SubResource("CapsuleShape2D_fvaky")
 disabled = true
 
@@ -289,5 +276,9 @@ anim_player = NodePath("../playerAnimation")
 parameters/playback = SubResource("AnimationNodeStateMachinePlayback_maobc")
 parameters/conditions/idle = false
 parameters/conditions/is_moving = false
-parameters/idle/blend_position = Vector2(0, 0)
+parameters/idle/blend_position = Vector2(0, -0.00604784)
 parameters/run/blend_position = Vector2(0, 0)
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+collision_mask = 2
+script = ExtResource("4_v5cea")
