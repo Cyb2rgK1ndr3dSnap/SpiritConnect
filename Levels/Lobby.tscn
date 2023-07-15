@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://tsxmqkl3d2b8"]
+[gd_scene load_steps=28 format=3 uid="uid://tsxmqkl3d2b8"]
 
 [ext_resource type="Script" path="res://Levels/Lobby.gd" id="1_78wqr"]
 [ext_resource type="PackedScene" uid="uid://coinljyaqicrn" path="res://Characters/player.tscn" id="1_klkdd"]
@@ -18,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://dcbw7irud6wys" path="res://Resources/world/Forest BETA V3/Forest Structures.png" id="14_oxemv"]
 [ext_resource type="PackedScene" uid="uid://g1fldmkh830k" path="res://Objects/magic_circle_tp_1.tscn" id="16_1lk25"]
 [ext_resource type="Script" path="res://Objects/magic_circle_tp_1.gd" id="17_iu0a3"]
+[ext_resource type="Script" path="res://Levels/Camera2D Mini-Map.gd" id="17_y86xk"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_mcoc2"]
 resource_name = "Pillars"
@@ -4354,7 +4355,7 @@ sources/6 = SubResource("TileSetAtlasSource_tfp86")
 
 [node name="Lobby" type="Node2D"]
 y_sort_enabled = true
-position = Vector2(307, -16)
+position = Vector2(100, -100)
 script = ExtResource("1_78wqr")
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -4390,12 +4391,26 @@ layer_3/tile_data = PackedInt32Array(131054, 2, 458752, 589799, 2, 393216, 13762
 
 [node name="Player" parent="." instance=ExtResource("1_klkdd")]
 position = Vector2(-308, 7)
-speed = 400.0
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../Camera2D")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
+
+[node name="Mini-Mapa Contenedor" type="SubViewportContainer" parent="Player"]
+offset_left = 404.0
+offset_top = -303.0
+offset_right = 529.0
+offset_bottom = -178.0
+
+[node name="SubViewport" type="SubViewport" parent="Player/Mini-Mapa Contenedor"]
+handle_input_locally = false
+size = Vector2i(125, 125)
+render_target_update_mode = 4
+
+[node name="Camera2D Mini-Map" type="Camera2D" parent="Player/Mini-Mapa Contenedor/SubViewport" node_paths=PackedStringArray("target")]
+script = ExtResource("17_y86xk")
+target = NodePath("../../..")
 
 [node name="magic_circle_tp_1" parent="." instance=ExtResource("16_1lk25")]
 y_sort_enabled = true
