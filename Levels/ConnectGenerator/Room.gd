@@ -8,7 +8,7 @@ const CONSECUTIVE_MAX_EQUALITIES := 10
 # Radius of the circle in which we randomly place the room.
 @export var radius := 600
 # Interval to generate a random width and height for the room, in tiles.
-@export var room_size := Vector2(2, 9)
+@export var room_size := Vector2(3, 10) # (2,9) #2 (3, 8)
 
 var size := Vector2.ZERO
 

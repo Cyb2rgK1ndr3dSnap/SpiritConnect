@@ -14,8 +14,14 @@ signal rooms_placed
 
 const Room := preload("Room.tscn")
 
-var nodes: Array = []
-var node
+var nodes: Dictionary
+var nodesPosition : Dictionary
+var nodeStone
+var selectNode
+var startNode
+var endNode
+var route: Array = []
+var i: int = 1
 # Maximum number of generated rooms.
 @export var max_rooms := 60
 # Controls the number of paths we add to the dungeon after generating it,
@@ -35,9 +41,11 @@ var _draw_extra := []
 @onready var level: TileMap = $Level
 @onready var player: CharacterBody2D = $Player
 @onready var rayCast: RayCast2D = $Player/RayCast2D
+@onready var prompt: Label = $Player/Label
+@onready var line: Line2D = $connectionParticles
 
-
-func _ready() -> void:
+func _ready():
+	print("ENTRO A ESCENA")
 	_rng.randomize()
 	await _generate()
 	place_player()
@@ -102,26 +110,46 @@ func _process(_delta: float) -> void:
 func _draw() -> void:
 	if _path == null:
 		return
-	##!!PARTE PARA GENERAR NODO EN EL ROOM
+	##!!!!!!!!DRAW THE BLUE LINES BETWEEN THE NODES
+	"""
+	if nodes != null:
+		for n1 in nodes.keys():
+			for n2 in nodes.get(n1):
+				if n2 != null:
+					draw_line(nodesPosition.get(n1), nodesPosition.get(n2.keys()[0]), "#67B4F1", 5)
+	"""
+	print("ROUTE",route)
+	if selectNode != null:
+		line.clear_points()
+		for nconnect in nodes.get(selectNode):
+			line.add_point(nodesPosition.get(selectNode))
+			if (nconnect != null and nconnect.keys()[0] != route[i-2].keys()[0]):
+				#print(nconnect.keys()[0])
+				line.add_point(nodesPosition.get(nconnect.keys()[0]))
+				#draw_line(nodesPosition.get(selectNode), nodesPosition.get(nconnect.keys()[0]), Color.ALICE_BLUE, 5)
+	if i >= route.size():
+		line.clear_points()
+		print("TERMINO EL NIVEL")
+	##!!PARTE PARA GENERAR NODO EN EL ROOM	
 	var tilemap_transform := level.get_global_transform().affine_inverse()
 	for point1_id in _path.get_point_ids():
 		var point1_position := _path.get_point_position(point1_id)
 		for point2_id in _path.get_point_connections(point1_id):
 			var point2_position := _path.get_point_position(point2_id)
-			draw_line(point1_position, point2_position, Color.RED, 20)
-			#print("DISTANCE",point1_position.distance_to(point2_position))
 			###!!SET THE NODES IN THE MAP
-			var tilemap_point1 := level.local_to_map(tilemap_transform.basis_xform(point1_position))
-			var tilemap_point2 := level.local_to_map(tilemap_transform.basis_xform(point2_position))
-			#print(level.local_to_map(level.get_global_transform().affine_inverse().basis_xform(point1_position)))
+			var tilemap_point1 := level.local_to_map(tilemap_transform.basis_xform(Vector2i(point1_position)))
+			var tilemap_point2 := level.local_to_map(tilemap_transform.basis_xform(Vector2i(point2_position)))
 			level.set_cell(1, tilemap_point1, 5, Vector2i.ZERO, 5)
 			level.set_cell(1, tilemap_point2, 5, Vector2i.ZERO, 5)
-			SpiritConnectUtils.add_variable_to_dict(tilemap_point1,nodes)
-			SpiritConnectUtils.add_variable_to_dict(tilemap_point2,nodes)
-	
+			SpiritConnectUtils.add_variable_to_dict(tilemap_point1,point1_position,nodesPosition)
+			SpiritConnectUtils.add_variable_to_dict(tilemap_point2,point2_position,nodesPosition)
+			SpiritConnectUtils.add_variable_to_dict(tilemap_point1,[tilemap_point2,point1_position.distance_to(point2_position)],nodes)
+			SpiritConnectUtils.add_variable_to_dict(tilemap_point2,[tilemap_point1,point2_position.distance_to(point1_position)],nodes)
+	"""
 	if not _draw_extra.is_empty():
 		for pair in _draw_extra:
 			draw_line(pair[0], pair[1], Color.GREEN, 20)
+	"""
 	
 
 
@@ -145,46 +173,35 @@ func _generate() -> void:
 	level.clear()
 	###!!!!!!
 	
-	"""
+	
 	for x in range(-100, map_w):
 		for y in range(-100, map_h):
 			#level.set_cell(0, Vector2i(x,y), 1, Vector2i.ZERO, 1)
 			level.set_cell(0, Vector2i(x,y), 0, Vector2i.ZERO, 0)
-	"""
+	
 	
 	for point in _data:
 		level.set_cell(0, point, 3, Vector2i.ZERO, 3)
 		###!!!IN THIS PART DRAW THE WALLS OR LIMITS OF THE ROOMS
 		if level.get_cell_alternative_tile(0, Vector2i(point.x+1,point.y))!=3:
-			level.set_cell(0, Vector2i(point.x+1,point.y), 2, Vector2i.ZERO, 2)
+			level.set_cell(0, Vector2i(point.x+1,point.y), randi_range(6, 13), Vector2i.ZERO, 2)
 			#if level.get_cell_alternative_tile(0, Vector2i(point.x+2,point.y))!=2:
 			#	level.set_cell(0, Vector2i(point.x+2,point.y), 0, Vector2i.ZERO, 0)
 					
 		if level.get_cell_alternative_tile(0, Vector2i(point.x-1,point.y))!=3:
-			level.set_cell(0, Vector2i(point.x-1,point.y), 2, Vector2i.ZERO, 2)
+			level.set_cell(0, Vector2i(point.x-1,point.y), randi_range(6, 13), Vector2i.ZERO, 2)
 			#if level.get_cell_alternative_tile(0, Vector2i(point.x-2,point.y))!=2:
 			#	level.set_cell(0, Vector2i(point.x-2,point.y), 0, Vector2i.ZERO, 0)
 			
 		if level.get_cell_alternative_tile(0, Vector2i(point.x,point.y+1))!=3:
-			level.set_cell(0, Vector2i(point.x,point.y+1), 2, Vector2i.ZERO, 2)
+			level.set_cell(0, Vector2i(point.x,point.y+1), randi_range(6, 13), Vector2i.ZERO, 2)
 			#if level.get_cell_alternative_tile(0, Vector2i(point.x,point.y+2))!=2:
 			#	level.set_cell(0, Vector2i(point.x,point.y+2), 0, Vector2i.ZERO, 0)
 			
 		if level.get_cell_alternative_tile(0, Vector2i(point.x,point.y-1))!=3:
-			level.set_cell(0, Vector2i(point.x,point.y-1), 2, Vector2i.ZERO, 2)
+			level.set_cell(0, Vector2i(point.x,point.y-1), randi_range(6, 13), Vector2i.ZERO, 2)
 			#if level.get_cell_alternative_tile(0, Vector2i(point.x,point.y-2))!=2:
 			#	level.set_cell(0, Vector2i(point.x,point.y-2), 0, Vector2i.ZERO, 0)
-"""			
-func generate_green_tiles(point: Vector2i, level: TileMap)->void:
-	if level.get_cell_alternative_tile(0, Vector2i(point.x+2,point.y))!=2:
-		level.set_cell(0, Vector2i(point.x+2,point.y), 0, Vector2i.ZERO, 0)
-	if level.get_cell_alternative_tile(0, Vector2i(point.x-2,point.y))!=2:
-		level.set_cell(0, Vector2i(point.x-2,point.y), 0, Vector2i.ZERO, 0)
-	if level.get_cell_alternative_tile(0, Vector2i(point.x,point.y+2))!=2:
-		level.set_cell(0, Vector2i(point.x,point.y+2), 0, Vector2i.ZERO, 0)
-	if level.get_cell_alternative_tile(0, Vector2i(point.x,point.y-2))!=2:
-		level.set_cell(0, Vector2i(point.x,point.y-2), 0, Vector2i.ZERO, 0)
-"""
 # Adds room tile positions to `_data`.
 func _add_room(room: SpiritConnectRoom) -> void:
 	for offset in room:
@@ -207,7 +224,6 @@ func _add_corridors():
 			var point2 := _path.get_point_position(point2_id)
 			if Vector2(point1_id, point2_id) in connected:
 				continue
-
 			point1 = level.local_to_map(point1)
 			point2 = level.local_to_map(point2)
 			_add_corridor(point1.x, point2.x, point1.y, Vector2.AXIS_X)
@@ -254,18 +270,96 @@ func _is_main_room(room: SpiritConnectRoom) -> bool:
 
 ###!!!!!CAMBIAR POSICIÓN DE PLAYER	
 func place_player():
-	var roomsPos =  SpiritConnectUtils.choose(_draw_extra)
-	var startPos =  SpiritConnectUtils.choose(roomsPos)
-	#print("Posición de spawn",startPos)
-	print(level.local_to_map(level.get_global_transform().affine_inverse().basis_xform(startPos)))
-	player.position = startPos
-	print(nodes,len(nodes))
-	#print(level.local_to_map(player.global_position))
+	#var roomsPos =  SpiritConnectUtils.choose(nodesPosition.keys())
+	#var startPos = roomsPos
+	var flagResetExit = false
+	for nm in nodes.keys():
+		if startNode == null or (nm.x >= startNode.x and (nm.y >= startNode.y or nm.y <= startNode.y)):
+			startNode = nm
+			print("Inicio",startNode)	
+	for nm in nodes.keys():
+		if endNode == null or (nm.x < endNode.x and (nm.y <= endNode.y or nm.y >= endNode.y)):
+			endNode = nm
+			print("Final",endNode)
+			
+	#!!!!!CONEXIÓN DE TODOS LOS NODOS Y SUS DISTANCIAS ALEATORIAS
+	nodes = SpiritConnectUtils.connect_nodes(nodes)
+	for nodeA in nodes: #ITERAR EN LOS NODOS PRINCIPALES
+		var nodesSearch = nodes.get(nodeA) #TOMAR LA ITERACION Y TRAER LOS CUATRO PARTES DEL PLANO
+		for search in nodesSearch:
+			if search != null:
+				var nodesCatch = nodes.get(search.keys()[0])
+				var change = nodesCatch.map(
+					func(x):
+						if(x != null): 
+							if(x.keys()[0] == nodeA):
+								return {x.keys()[0]:search.values()[0]}
+							return x
+						return null
+						)
+				nodes.merge({search.keys()[0]:change},true)
+	print(nodes)
+	queue_redraw()
+	route.append({startNode:true})
+	while route.find(endNode) != 1:
+		var iteration = route[route.size()-1].keys()[0]
+		var minor
+		var keyAdd
+		var found = false
+		print(route)
+		print(iteration)
+		for next in nodes.get(iteration):
+			found = false
+			if next != null:
+				if minor == null or next.values() <= minor:
+					for k in route:
+						if next.keys()[0] in k.keys():
+							found = true
+					if found == false:
+						minor = next.values()
+						keyAdd = next.keys()[0]
+				if next.keys()[0] == endNode:
+					keyAdd = next.keys()[0]
+		###!!! keyAdd es null, es porque no hay caminos para conectar el inicio y final
+		flagResetExit = false
+		if keyAdd == null:
+			break
+		route.append({keyAdd:false})
+		###!!!flagResetExit es para saber si ya existe el nodo se encuentra en el array, si es asi sale del loop
+		###------------------
+		for k in route:
+			if endNode in k.keys():
+				flagResetExit = true
+		if flagResetExit == true:
+			break
+	###------------------
+	if flagResetExit == false:
+		print(get_tree().current_scene)
+		SceneTransition.reload_scene()
+		print("RESET")
+	###------------------
+	player.position = nodesPosition.get(startNode)
+	selectNode = startNode
+	await get_tree().create_timer(3).timeout
+	player.speed = 500
 	
 func _physics_process(delta):
 	#print(level.local_to_map(player.global_position))
-	node = Character_Player_RayCast.rotate_pointer(level,rayCast)
-	if node in nodes:
-		print("Existe node")
-	
-	
+	nodeStone = Character_Player_RayCast.rotate_pointer(level,rayCast)
+	if nodeStone in nodes:
+		prompt.text = "Press E for connect the magic stone, %s!" %nodeStone
+		if Input.is_action_just_pressed("Interact"):
+			#var packed_scene = preload("res://Levels/ConnectGenerator/SpiritConnectGenerator.tscn")
+			#SceneTransition.change_scene(packed_scene)
+			#print("NEW LEVEL")
+			selectNode = nodeStone
+			if selectNode == route[i].keys()[0]:
+				route[i] = {route[i].keys()[0]:true}
+				i += 1
+				queue_redraw()
+			pass #WHEN INTERACT CONNECT THE NODE IF IS CORRECT, IF NOT IS CORRECT SHOW A MESSAGE AND SET A PENALTY
+	else:
+		prompt.text=""
+
+func _input(event)->void:
+	pass

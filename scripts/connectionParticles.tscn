@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://mkkyc2ujpxjy"]
+
+[ext_resource type="Shader" path="res://scripts/connectionParticles.gdshader" id="1_1b8y3"]
+[ext_resource type="Texture2D" uid="uid://bqsrg4vmqgync" path="res://Resources/particles/Basics_particles_2.png" id="2_vocl3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_txth0"]
+shader = ExtResource("1_1b8y3")
+shader_parameter/scrolling_speed = 0.8
+shader_parameter/opacity = 0.5
+
+[node name="connectionParticles" type="Line2D"]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_txth0")
+width = 30.0
+texture = ExtResource("2_vocl3")
+texture_mode = 1
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
