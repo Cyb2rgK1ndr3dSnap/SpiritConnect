@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://ccj0p3vvcbh1c"]
+[gd_scene load_steps=15 format=3 uid="uid://ccj0p3vvcbh1c"]
 
 [ext_resource type="Script" path="res://Objects/Magic_stone_1.gd" id="1_3clpf"]
 [ext_resource type="Texture2D" uid="uid://kxhgdkrcg33h" path="res://Resources/world/Pixel Art Top Down - Basic/Resources_individuals/objects/Magic_stone_1.png" id="1_pbec6"]
@@ -110,6 +110,9 @@ transitions = ["Start", "touch_me", SubResource("AnimationNodeStateMachineTransi
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7vyq8"]
 size = Vector2(26, 37)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_lod0v"]
+radius = 59.0
+
 [node name="Magic_stone_1" type="StaticBody2D"]
 y_sort_enabled = true
 collision_layer = 2
@@ -143,3 +146,10 @@ parameters/playback = SubResource("AnimationNodeStateMachinePlayback_vfm5p")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 7.5)
 shape = SubResource("RectangleShape2D_7vyq8")
+
+[node name="Area2D" type="Area2D" parent="."]
+y_sort_enabled = true
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_lod0v")

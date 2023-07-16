@@ -12,15 +12,13 @@ func _physics_process(delta):
 		Input.is_action_pressed("right") or 
 			Input.is_action_pressed("up") or
 				Input.is_action_pressed("down")):
-					target_position = Input.get_vector("left", "right", "up", "down").normalized() * 50
+					target_position = Input.get_vector("left", "right", "up", "down").normalized() * 25
 
 static func rotate_pointer(level: TileMap,raycast: RayCast2D):
-	#var direction = Input.get_vector("left", "right", "up", "down").normalized()
-					
 	if(raycast.is_colliding()):
 		var detected = raycast.get_collider()
-		if detected is MagicStone_1:
-			print(detected.name)
-			
-		return level.local_to_map(level.get_global_transform().affine_inverse().basis_xform(raycast.get_collision_point()))
-	
+		#print("AREA2D",level.local_to_map(level.get_global_transform().affine_inverse().basis_xform(detected.get_global_position())))
+		#if detected is MagicStone_1:
+		#	print(detected.name)
+		return level.local_to_map(level.get_global_transform().affine_inverse().basis_xform(detected.get_global_position()))
+		#return level.local_to_map(level.get_global_transform().affine_inverse().basis_xform(raycast.get_collision_point()))

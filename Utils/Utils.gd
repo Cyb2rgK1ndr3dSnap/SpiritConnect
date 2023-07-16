@@ -71,9 +71,58 @@ static func choose(choices):
 	return choices[rand_index]
 	
 
-static func add_variable_to_dict(value, my_dict):
-	if value not in my_dict:
-		my_dict.append(value)
-		print("Variable added successfully.")
-	else:
-		print("Value already exists. Not adding.")
+static func add_variable_to_dict(key, value, my_dict):
+	if key not in my_dict:
+		my_dict[key] = value
+	#	print("Variable added successfully.")
+	#else:
+	#	print("Value already exists. Not adding.")
+		
+static func connect_nodes(my_dict):
+	var dict_connect: Dictionary
+	for node in my_dict:
+		var points = []
+		var p1
+		var p2
+		points.resize(4)
+		for nodes2 in my_dict:
+			if(node != nodes2):
+				p1 = Vector2(node).distance_to(Vector2(nodes2))
+				if nodes2.x > node.x and nodes2.y > node.y:
+					if points[3] == null or p1 < Vector2(node).distance_to(Vector2(points[3].keys()[0])) :
+						points[3] = nodes2
+						##################
+						if(node != nodes2):
+							if points[3] != null:
+								points[3] = {nodes2:randi() % 1000}
+				if nodes2.x < node.x and nodes2.y > node.y:
+					if points[2] == null or p1 < Vector2(node).distance_to(Vector2(points[2].keys()[0])):
+						points[2] = nodes2 
+						##################
+						if(node != nodes2):
+							if points[2] != null:
+								points[2] = {nodes2:randi() % 1000}
+				if nodes2.y < node.y and nodes2.x < node.x:
+					if points[1] == null or p1 < Vector2(node).distance_to(Vector2(points[1].keys()[0])):
+						points[1] = nodes2 
+						##################
+						if(node != nodes2):
+							if points[1] != null:
+								points[1] = {nodes2:randi() % 1000}
+				if nodes2.y < node.y and nodes2.x > node.x:
+					if points[0] == null or p1 < Vector2(node).distance_to(Vector2(points[0].keys()[0])):
+						points[0] = nodes2
+						##################
+						if(node != nodes2):
+							if points[0] != null:
+								points[0] = {nodes2:randi() % 1000}
+			dict_connect[node]=points
+	return dict_connect
+	
+	"""	
+	for node in dict_connect:
+		var nodesSearch = dict_connect.get(node)
+		for search in nodesSearch:
+			if search != null:
+				print(node,"search",dict_connect.get(search.keys()[0]))
+	"""
