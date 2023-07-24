@@ -1,10 +1,12 @@
-[gd_scene load_steps=29 format=3 uid="uid://coinljyaqicrn"]
+[gd_scene load_steps=31 format=3 uid="uid://coinljyaqicrn"]
 
 [ext_resource type="Script" path="res://Characters/player.gd" id="1_j6b0o"]
 [ext_resource type="Texture2D" uid="uid://c8lj8bpqwmmmc" path="res://Resources/Blue_witch/B_witch_idle.png" id="1_lk362"]
 [ext_resource type="Texture2D" uid="uid://cgh4rl3cxiutr" path="res://Resources/Blue_witch/B_witch_run - left.png" id="2_n5fro"]
 [ext_resource type="Texture2D" uid="uid://cm3lwi87ls8pf" path="res://Resources/Blue_witch/B_witch_run - right.png" id="3_0mjca"]
+[ext_resource type="Texture2D" uid="uid://b7ua8shqr23n3" path="res://Resources/lamp.png" id="3_uqrqh"]
 [ext_resource type="Script" path="res://Characters/InteracRay.gd" id="4_v5cea"]
+[ext_resource type="Texture2D" uid="uid://ytgm8qtrakgs" path="res://Resources/light.png" id="6_ywjyp"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fvaky"]
 radius = 6.0
@@ -176,52 +178,52 @@ _data = {
 "run_up": SubResource("Animation_gy4q0")
 }
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_oaf35"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_bftxq"]
 animation = &"idle"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0u7bt"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6wehy"]
 animation = &"idle"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ao2dw"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_o46eq"]
 animation = &"idle"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_b4piy"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xpspm"]
 animation = &"idle"
 
 [sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_ofjvc"]
 auto_triangles = false
-blend_point_0/node = SubResource("AnimationNodeAnimation_oaf35")
+blend_point_0/node = SubResource("AnimationNodeAnimation_bftxq")
 blend_point_0/pos = Vector2(0, 1)
-blend_point_1/node = SubResource("AnimationNodeAnimation_0u7bt")
+blend_point_1/node = SubResource("AnimationNodeAnimation_6wehy")
 blend_point_1/pos = Vector2(-1, 0)
-blend_point_2/node = SubResource("AnimationNodeAnimation_ao2dw")
+blend_point_2/node = SubResource("AnimationNodeAnimation_o46eq")
 blend_point_2/pos = Vector2(0, -1)
-blend_point_3/node = SubResource("AnimationNodeAnimation_b4piy")
+blend_point_3/node = SubResource("AnimationNodeAnimation_xpspm")
 blend_point_3/pos = Vector2(1, 0)
 triangles = PackedInt32Array(0, 1, 3, 1, 2, 3)
 min_space = Vector2(-1, -1.01)
 max_space = Vector2(1, 1.01)
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_a7gyr"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2qkjx"]
 animation = &"run-left"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ewra2"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_484sp"]
 animation = &"run-right"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1p7rq"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ec4pp"]
 animation = &"run_up"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_kbjb4"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ijfg4"]
 animation = &"run_down"
 
 [sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_4aadm"]
-blend_point_0/node = SubResource("AnimationNodeAnimation_a7gyr")
+blend_point_0/node = SubResource("AnimationNodeAnimation_2qkjx")
 blend_point_0/pos = Vector2(-1, 0)
-blend_point_1/node = SubResource("AnimationNodeAnimation_ewra2")
+blend_point_1/node = SubResource("AnimationNodeAnimation_484sp")
 blend_point_1/pos = Vector2(1, 0)
-blend_point_2/node = SubResource("AnimationNodeAnimation_1p7rq")
+blend_point_2/node = SubResource("AnimationNodeAnimation_ec4pp")
 blend_point_2/pos = Vector2(0, 1.1)
-blend_point_3/node = SubResource("AnimationNodeAnimation_kbjb4")
+blend_point_3/node = SubResource("AnimationNodeAnimation_ijfg4")
 blend_point_3/pos = Vector2(0, -1.1)
 min_space = Vector2(-1, -1.1)
 max_space = Vector2(1, 1.1)
@@ -251,13 +253,21 @@ graph_offset = Vector2(-216.252, 14.8309)
 
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(41, 40)
-collision_mask = 2
+collision_mask = 6
 script = ExtResource("1_j6b0o")
+speed = 500.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -1)
 texture = ExtResource("1_lk362")
 vframes = 6
+
+[node name="Lamp" type="Sprite2D" parent="."]
+visible = false
+self_modulate = Color(1, 1, 1, 0.870588)
+position = Vector2(-1, -29)
+scale = Vector2(0.03, 0.03)
+texture = ExtResource("3_uqrqh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 5)
@@ -275,7 +285,7 @@ anim_player = NodePath("../playerAnimation")
 parameters/playback = SubResource("AnimationNodeStateMachinePlayback_maobc")
 parameters/conditions/idle = false
 parameters/conditions/is_moving = false
-parameters/idle/blend_position = Vector2(0, -0.00604784)
+parameters/idle/blend_position = Vector2(-0.000813663, 0.00412238)
 parameters/run/blend_position = Vector2(0, 0)
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
@@ -284,12 +294,44 @@ hit_from_inside = true
 collide_with_areas = true
 script = ExtResource("4_v5cea")
 
+[node name="LightArea_1" type="PointLight2D" parent="."]
+enabled = false
+color = Color(0.972549, 1, 1, 1)
+energy = 0.6
+texture = ExtResource("6_ywjyp")
+texture_scale = 0.5
+
+[node name="LightArea_2" type="PointLight2D" parent="."]
+enabled = false
+color = Color(0.972549, 0.419608, 0.482353, 1)
+energy = 0.4
+texture = ExtResource("6_ywjyp")
+
+[node name="LightArea_3" type="PointLight2D" parent="."]
+enabled = false
+color = Color(0.972549, 0.419608, 0.305882, 1)
+energy = 0.2
+texture = ExtResource("6_ywjyp")
+texture_scale = 2.5
+
 [node name="Label" type="Label" parent="."]
 z_index = 1
 y_sort_enabled = true
 offset_left = -185.0
-offset_top = 144.0
+offset_top = 129.0
 offset_right = 172.0
-offset_bottom = 178.0
+offset_bottom = 163.0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="."]
+z_index = 1
+y_sort_enabled = true
+offset_left = -185.0
+offset_top = 161.0
+offset_right = 172.0
+offset_bottom = 195.0
+text = "
+"
 horizontal_alignment = 1
 vertical_alignment = 1

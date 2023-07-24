@@ -7,7 +7,6 @@ var level = preload("res://Levels/ConnectGenerator/SpiritConnectGenerator.tscn")
 @onready var animation_tree : AnimationTree = $AnimationTree
 @onready var collisionShape: CollisionShape2D = $CollisionShape2D
 @onready var raycast: RayCast2D = $RayCast2D
-var node = Node2D.new()
 
 var direction : Vector2 = Vector2.ZERO
 	
@@ -15,6 +14,11 @@ func _ready():
 	animation_tree.active = true
 	await get_tree().create_timer(3).timeout
 	collisionShape.disabled = false
+	if(GLOBAL.actualLevel == 1):
+		$LightArea_1.enabled = true
+		$LightArea_2.enabled = true
+		$LightArea_3.enabled = true
+		$Lamp.visible = true
 	
 func _process(delta):
 	update_animation_parameters()
@@ -22,7 +26,6 @@ func _process(delta):
 	
 func _physics_process(delta):
 	direction = Input.get_vector("left", "right", "up", "down").normalized()
-	
 	if direction:
 		velocity = direction * speed
 	else:

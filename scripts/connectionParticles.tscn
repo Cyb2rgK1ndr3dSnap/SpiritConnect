@@ -11,7 +11,7 @@ shader_parameter/opacity = 0.5
 [node name="connectionParticles" type="Line2D"]
 texture_repeat = 2
 material = SubResource("ShaderMaterial_txth0")
-width = 30.0
+width = 35.0
 texture = ExtResource("2_vocl3")
 texture_mode = 1
 joint_mode = 2
