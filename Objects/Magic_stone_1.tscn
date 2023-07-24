@@ -1,9 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://ccj0p3vvcbh1c"]
+[gd_scene load_steps=18 format=3 uid="uid://ccj0p3vvcbh1c"]
 
 [ext_resource type="Script" path="res://Objects/Magic_stone_1.gd" id="1_3clpf"]
 [ext_resource type="Texture2D" uid="uid://kxhgdkrcg33h" path="res://Resources/world/Pixel Art Top Down - Basic/Resources_individuals/objects/Magic_stone_1.png" id="1_pbec6"]
 [ext_resource type="Texture2D" uid="uid://b7mljlm2p6rkx" path="res://Resources/world/Pixel Art Top Down - Basic/Resources_individuals/objects/Magic_stone_words_1.png" id="3_m7ded"]
 [ext_resource type="PackedScene" uid="uid://bmxxt0wb01s5u" path="res://Objects/animations/RotationBehavior.tscn" id="4_pxojl"]
+[ext_resource type="Texture2D" uid="uid://ytgm8qtrakgs" path="res://Resources/light.png" id="5_cm7xu"]
 
 [sub_resource type="Animation" id="Animation_e6tb3"]
 length = 0.001
@@ -42,6 +43,34 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [ExtResource("3_m7ded")]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("StoneLight:energy")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.4]
+}
+
+[sub_resource type="Animation" id="Animation_i0djp"]
+resource_name = "light"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StoneLight:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.4]
 }
 
 [sub_resource type="Animation" id="Animation_jeja4"]
@@ -87,6 +116,7 @@ tracks/2/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kw8pm"]
 _data = {
 "RESET": SubResource("Animation_e6tb3"),
+"light": SubResource("Animation_i0djp"),
 "touch_me": SubResource("Animation_jeja4")
 }
 
@@ -108,10 +138,13 @@ transitions = ["Start", "touch_me", SubResource("AnimationNodeStateMachineTransi
 [sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_vfm5p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7vyq8"]
-size = Vector2(26, 37)
+size = Vector2(30, 41)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lod0v"]
 radius = 59.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vuclk"]
+radius = 257.002
 
 [node name="Magic_stone_1" type="StaticBody2D"]
 y_sort_enabled = true
@@ -121,6 +154,7 @@ script = ExtResource("1_3clpf")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 y_sort_enabled = true
+scale = Vector2(1.2, 1.2)
 texture = ExtResource("1_pbec6")
 
 [node name="magic_mark" type="Sprite2D" parent="."]
@@ -144,7 +178,7 @@ process_callback = 0
 parameters/playback = SubResource("AnimationNodeStateMachinePlayback_vfm5p")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 7.5)
+position = Vector2(0, 9.5)
 shape = SubResource("RectangleShape2D_7vyq8")
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -153,3 +187,19 @@ collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_lod0v")
+
+[node name="AreaLight" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaLight"]
+shape = SubResource("CircleShape2D_vuclk")
+
+[node name="StoneLight" type="PointLight2D" parent="."]
+enabled = false
+color = Color(0, 1, 1, 1)
+energy = 0.4
+texture = ExtResource("5_cm7xu")
+texture_scale = 0.8
+
+[connection signal="body_entered" from="AreaLight" to="." method="_on_area_light_body_entered"]
+[connection signal="body_exited" from="AreaLight" to="." method="_on_area_light_body_exited"]

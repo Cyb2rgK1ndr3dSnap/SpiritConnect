@@ -1,18 +1,67 @@
-[gd_scene load_steps=12 format=3 uid="uid://bg0gccaxfufuq"]
+[gd_scene load_steps=29 format=3 uid="uid://bg0gccaxfufuq"]
 
 [ext_resource type="Script" path="res://Levels/Transition/Scene_Transition.gd" id="1_rq75f"]
 [ext_resource type="Texture2D" uid="uid://cv6rrdujuhumt" path="res://Resources/free-sky-with-clouds-background-pixel-art-set/Clouds/Clouds 4/1.png" id="2_6eqj6"]
+[ext_resource type="FontFile" uid="uid://cmfob6j8dqm11" path="res://Resources/fonts/SRAFreePixelFontPack/SRAFreePixelFontPack/PixelHigh.ttf" id="2_u1gbc"]
+[ext_resource type="Texture2D" uid="uid://b4c8g3yxailv6" path="res://Resources/corner.png" id="3_k6a1j"]
 [ext_resource type="Texture2D" uid="uid://dp0timbs8frhb" path="res://Resources/free-sky-with-clouds-background-pixel-art-set/Clouds/Clouds 4/2.png" id="3_pgmen"]
 [ext_resource type="Texture2D" uid="uid://dtofiy6k2nw6v" path="res://Resources/free-sky-with-clouds-background-pixel-art-set/Clouds/Clouds 4/3.png" id="4_tc6mb"]
 [ext_resource type="Texture2D" uid="uid://cym15vudpkkg0" path="res://Resources/free-sky-with-clouds-background-pixel-art-set/Clouds/Clouds 4/4.png" id="5_wig5p"]
 [ext_resource type="Shader" path="res://Levels/Transition/Scene_Transition_Clouds_2.gdshader" id="6_gepgj"]
+[ext_resource type="Texture2D" uid="uid://b7ua8shqr23n3" path="res://Resources/lamp.png" id="9_m0oa3"]
+[ext_resource type="FontFile" uid="uid://c7ciro5bv4r3m" path="res://Resources/fonts/SRAFreePixelFontPack/SRAFreePixelFontPack/PixelMiddle.ttf" id="9_wu76q"]
+[ext_resource type="Texture2D" uid="uid://dehuselosfhtd" path="res://Resources/parallax_forest_pack web/parallax_forest_pack web/layers/parallax-forest-back-trees.png" id="10_00g2a"]
+[ext_resource type="Texture2D" uid="uid://ytgm8qtrakgs" path="res://Resources/light.png" id="10_7v4n8"]
+[ext_resource type="Shader" path="res://scripts/connectionParticles.gdshader" id="11_n48u8"]
+[ext_resource type="Texture2D" uid="uid://bc1iryjgdokdh" path="res://Resources/parallax_forest_pack web/parallax_forest_pack web/layers/parallax-forest-middle-trees.png" id="11_p4nna"]
+[ext_resource type="Texture2D" uid="uid://bqt88xxds570e" path="res://Resources/parallax_forest_pack web/parallax_forest_pack web/layers/parallax-forest-front-trees.png" id="12_o4s2d"]
+[ext_resource type="Texture2D" uid="uid://bgqw45v28rtp2" path="res://Resources/parallax_forest_pack web/parallax_forest_pack web/layers/parallax-forest-lights.png" id="13_0l7bb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_moeqb"]
+shader = ExtResource("6_gepgj")
+shader_parameter/scrolling_speed = 0.0
+shader_parameter/opacity = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pc2wc"]
+shader = ExtResource("6_gepgj")
+shader_parameter/scrolling_speed = 0.1
+shader_parameter/opacity = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j5cyb"]
+shader = ExtResource("6_gepgj")
+shader_parameter/scrolling_speed = 0.2
+shader_parameter/opacity = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xddne"]
+shader = ExtResource("6_gepgj")
+shader_parameter/scrolling_speed = 0.1
+shader_parameter/opacity = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tthn1"]
+shader = ExtResource("11_n48u8")
+shader_parameter/scrolling_speed = 0.1
+shader_parameter/opacity = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bnusg"]
+shader = ExtResource("11_n48u8")
+shader_parameter/scrolling_speed = 0.2
+shader_parameter/opacity = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cimyv"]
+shader = ExtResource("11_n48u8")
+shader_parameter/scrolling_speed = 0.1
+shader_parameter/opacity = 1.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4j88j"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mfxbg"]
 
 [sub_resource type="Animation" id="Animation_uq8hn"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/path = NodePath("Transition:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -24,194 +73,50 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("ColorRect/Sky:hframes")
+tracks/1/path = NodePath("Transition/TextureRect2:material:shader_parameter/opacity")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
+"update": 0,
+"values": [1.0]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("ColorRect/Sky:frame")
+tracks/2/path = NodePath("Transition/TextureRect3:material:shader_parameter/opacity")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
+"update": 0,
+"values": [null]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("ColorRect/Sky:texture")
+tracks/3/path = NodePath("Transition/TextureRect4:material:shader_parameter/opacity")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("2_6eqj6")]
+"update": 0,
+"values": [1.0]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("ColorRect/Clouds:hframes")
+tracks/4/path = NodePath("Transition/TextureRect:material:shader_parameter/opacity")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("ColorRect/Clouds:frame")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("ColorRect/Clouds:texture")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("4_tc6mb")]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("ColorRect/Clouds_2:hframes")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
-}
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("ColorRect/Clouds_2:frame")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/9/type = "value"
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/path = NodePath("ColorRect/Clouds_2:texture")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("5_wig5p")]
-}
-tracks/10/type = "value"
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/path = NodePath("ColorRect/Stars:hframes")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
-}
-tracks/11/type = "value"
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/path = NodePath("ColorRect/Stars:frame")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/12/type = "value"
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/path = NodePath("ColorRect/Stars:texture")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("3_pgmen")]
-}
-tracks/13/type = "value"
-tracks/13/imported = false
-tracks/13/enabled = true
-tracks/13/path = NodePath("ColorRect/Sky:modulate")
-tracks/13/interp = 1
-tracks/13/loop_wrap = true
-tracks/13/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 0)]
-}
-tracks/14/type = "value"
-tracks/14/imported = false
-tracks/14/enabled = true
-tracks/14/path = NodePath("ColorRect/Clouds:modulate")
-tracks/14/interp = 1
-tracks/14/loop_wrap = true
-tracks/14/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
-}
-tracks/15/type = "value"
-tracks/15/imported = false
-tracks/15/enabled = true
-tracks/15/path = NodePath("ColorRect/Clouds_2:modulate")
-tracks/15/interp = 1
-tracks/15/loop_wrap = true
-tracks/15/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-tracks/16/type = "value"
-tracks/16/imported = false
-tracks/16/enabled = true
-tracks/16/path = NodePath("ColorRect/Stars:modulate")
-tracks/16/interp = 1
-tracks/16/loop_wrap = true
-tracks/16/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
+"values": [1.0]
 }
 
 [sub_resource type="Animation" id="Animation_j7b7v"]
@@ -221,7 +126,7 @@ step = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/path = NodePath("Transition:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -233,194 +138,50 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("ColorRect/Sky:hframes")
+tracks/1/path = NodePath("Transition/TextureRect2:material:shader_parameter/opacity")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("ColorRect/Sky:frame")
+tracks/2/path = NodePath("Transition/TextureRect3:material:shader_parameter/opacity")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2, 2.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 0, 0, 0, 0, 0]
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("ColorRect/Sky:texture")
+tracks/3/path = NodePath("Transition/TextureRect4:material:shader_parameter/opacity")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("2_6eqj6")]
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("ColorRect/Clouds:hframes")
+tracks/4/path = NodePath("Transition/TextureRect:material:shader_parameter/opacity")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("ColorRect/Clouds:frame")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2, 2.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 0, 0, 0, 0, 0]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("ColorRect/Clouds:texture")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("4_tc6mb")]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("ColorRect/Clouds_2:hframes")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
-}
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("ColorRect/Clouds_2:frame")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
-"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2, 2.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 0, 0, 0, 0, 0]
-}
-tracks/9/type = "value"
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/path = NodePath("ColorRect/Clouds_2:texture")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("5_wig5p")]
-}
-tracks/10/type = "value"
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/path = NodePath("ColorRect/Stars:hframes")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
-}
-tracks/11/type = "value"
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/path = NodePath("ColorRect/Stars:frame")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/keys = {
-"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2, 2.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 0, 0, 0, 0, 0]
-}
-tracks/12/type = "value"
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/path = NodePath("ColorRect/Stars:texture")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("3_pgmen")]
-}
-tracks/13/type = "value"
-tracks/13/imported = false
-tracks/13/enabled = true
-tracks/13/path = NodePath("ColorRect/Sky:modulate")
-tracks/13/interp = 1
-tracks/13/loop_wrap = true
-tracks/13/keys = {
 "times": PackedFloat32Array(0, 3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-tracks/14/type = "value"
-tracks/14/imported = false
-tracks/14/enabled = true
-tracks/14/path = NodePath("ColorRect/Clouds:modulate")
-tracks/14/interp = 1
-tracks/14/loop_wrap = true
-tracks/14/keys = {
-"times": PackedFloat32Array(0, 3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-tracks/15/type = "value"
-tracks/15/imported = false
-tracks/15/enabled = true
-tracks/15/path = NodePath("ColorRect/Clouds_2:modulate")
-tracks/15/interp = 1
-tracks/15/loop_wrap = true
-tracks/15/keys = {
-"times": PackedFloat32Array(0, 3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-tracks/16/type = "value"
-tracks/16/imported = false
-tracks/16/enabled = true
-tracks/16/path = NodePath("ColorRect/Stars:modulate")
-tracks/16/interp = 1
-tracks/16/loop_wrap = true
-tracks/16/keys = {
-"times": PackedFloat32Array(0, 3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+"values": [0.0, 1.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_osqa4"]
@@ -429,58 +190,277 @@ _data = {
 "dissolve": SubResource("Animation_j7b7v")
 }
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_5q1n5"]
-shader = ExtResource("6_gepgj")
-shader_parameter/scrolling_speed = 0.15
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_hl0t0"]
-shader = ExtResource("6_gepgj")
-shader_parameter/scrolling_speed = 0.1
-
 [node name="Scene_Transition" type="CanvasLayer"]
 script = ExtResource("1_rq75f")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_osqa4")
-}
-
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="Transition" type="ColorRect" parent="."]
 modulate = Color(1, 0.905882, 1, 0)
-anchors_preset = -1
-anchor_right = 1.825
-anchor_bottom = 1.855
-offset_right = -0.400146
-offset_bottom = -0.0400391
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
 
-[node name="Sky" type="Sprite2D" parent="ColorRect"]
-modulate = Color(1, 1, 1, 0)
-position = Vector2(1051, 601)
-scale = Vector2(3.64931, 3.70988)
+[node name="TextureRect" type="TextureRect" parent="Transition"]
+material = SubResource("ShaderMaterial_moeqb")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("2_6eqj6")
 
-[node name="Clouds" type="Sprite2D" parent="ColorRect"]
-modulate = Color(1, 1, 1, 0)
+[node name="TextureRect4" type="TextureRect" parent="Transition"]
 texture_repeat = 2
-material = SubResource("ShaderMaterial_5q1n5")
-position = Vector2(1056, 604.5)
-scale = Vector2(3.64583, 3.70062)
+material = SubResource("ShaderMaterial_pc2wc")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_pgmen")
+
+[node name="TextureRect2" type="TextureRect" parent="Transition"]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_j5cyb")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("4_tc6mb")
 
-[node name="Clouds_2" type="Sprite2D" parent="ColorRect"]
+[node name="TextureRect3" type="TextureRect" parent="Transition"]
 texture_repeat = 2
-material = SubResource("ShaderMaterial_hl0t0")
-position = Vector2(1050.5, 603.5)
-scale = Vector2(3.65104, 3.70062)
+material = SubResource("ShaderMaterial_xddne")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("5_wig5p")
 
-[node name="Stars" type="Sprite2D" parent="ColorRect"]
-modulate = Color(1, 1, 1, 0)
-position = Vector2(1051.5, 601.5)
-scale = Vector2(3.65104, 3.68827)
-texture = ExtResource("3_pgmen")
+[node name="Player_HUD" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+
+[node name="TextureRect3" type="TextureRect" parent="Player_HUD"]
+visible = false
+layout_mode = 2
+anchor_left = 0.009
+anchor_top = 0.009
+anchor_right = 0.13
+anchor_bottom = 0.194
+offset_left = -0.350001
+offset_top = 0.168
+offset_right = 560.5
+offset_bottom = 480.288
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.2, 0.2)
+size_flags_vertical = 4
+texture = ExtResource("9_m0oa3")
+metadata/_edit_use_anchors_ = true
+
+[node name="LightLamp" type="PointLight2D" parent="Player_HUD/TextureRect3"]
+position = Vector2(347.5, 342.5)
+scale = Vector2(0.522748, 0.49977)
+color = Color(0, 0, 0, 1)
+texture = ExtResource("10_7v4n8")
+texture_scale = 1.7
+
+[node name="Message" type="Label" parent="Player_HUD"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.121
+anchor_top = 0.034
+anchor_right = 0.338
+anchor_bottom = 0.082
+offset_left = -0.150009
+offset_top = -0.0320015
+offset_right = 0.299957
+offset_bottom = -0.136002
+theme_override_fonts/font = ExtResource("9_wu76q")
+theme_override_font_sizes/font_size = 24
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Menu_principal" type="ColorRect" parent="."]
+visible = false
+self_modulate = Color(0.827451, 0.435294, 0.8, 0.439216)
+y_sort_enabled = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+color = Color(1, 1, 1, 0.588235)
+
+[node name="TextureRect3" type="TextureRect" parent="Menu_principal"]
+self_modulate = Color(0.584314, 0.392157, 0.690196, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_00g2a")
+
+[node name="TextureRect4" type="TextureRect" parent="Menu_principal"]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_tthn1")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_p4nna")
+
+[node name="TextureRect5" type="TextureRect" parent="Menu_principal"]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_bnusg")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_o4s2d")
+
+[node name="TextureRect6" type="TextureRect" parent="Menu_principal"]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_cimyv")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("13_0l7bb")
+
+[node name="Label" type="Label" parent="Menu_principal"]
+self_modulate = Color(0.607843, 0.352941, 0.768627, 1)
+z_index = 1
+layout_mode = 2
+anchor_left = 0.402
+anchor_top = 0.265
+anchor_right = 0.564
+anchor_bottom = 0.265
+offset_left = -46.104
+offset_top = -108.72
+offset_right = 0.271973
+offset_bottom = 0.279984
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_u1gbc")
+theme_override_font_sizes/font_size = 120
+text = "MAGIC
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Menu_principal"]
+self_modulate = Color(0.458824, 0.341176, 0.937255, 1)
+z_index = 1
+layout_mode = 2
+anchor_left = 0.441
+anchor_top = 0.261
+anchor_right = 0.648
+anchor_bottom = 0.261
+offset_left = -0.0320129
+offset_top = -26.128
+offset_right = 56.504
+offset_bottom = 73.872
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_u1gbc")
+theme_override_font_sizes/font_size = 110
+text = "CONNECT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Menu_principal"]
+self_modulate = Color(1, 1, 1, 0.831373)
+layout_mode = 2
+anchor_left = 0.5
+anchor_top = 0.285
+anchor_right = 0.5
+anchor_bottom = 0.285
+offset_left = -235.0
+offset_top = -68.68
+offset_right = 216.0
+offset_bottom = 69.32
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_k6a1j")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="Menu_principal"]
+self_modulate = Color(1, 1, 1, 0.831373)
+layout_mode = 2
+anchor_left = 0.462
+anchor_top = 0.223
+anchor_right = 0.462
+anchor_bottom = 0.223
+offset_left = 345.776
+offset_top = 76.496
+offset_right = 821.776
+offset_bottom = 229.496
+rotation = 3.14178
+texture = ExtResource("3_k6a1j")
+expand_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu_principal"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.918
+anchor_top = 0.83
+anchor_right = 0.967
+anchor_bottom = 0.948
+offset_left = 0.463989
+offset_top = 0.159973
+offset_right = 0.0158691
+offset_bottom = -0.304077
+
+[node name="Play" type="Button" parent="Menu_principal/VBoxContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../Exit")
+focus_neighbor_bottom = NodePath("../Exit")
+mouse_default_cursor_shape = 2
+theme_override_colors/font_focus_color = Color(0, 0.196078, 1, 0.752941)
+theme_override_fonts/font = ExtResource("2_u1gbc")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4j88j")
+text = "Play"
+flat = true
+
+[node name="Exit" type="Button" parent="Menu_principal/VBoxContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../Play")
+focus_neighbor_bottom = NodePath("../Play")
+theme_override_colors/font_focus_color = Color(0, 0.196078, 1, 0.752941)
+theme_override_fonts/font = ExtResource("2_u1gbc")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/focus = SubResource("StyleBoxEmpty_mfxbg")
+text = "Exit"
+flat = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_osqa4")
+}
